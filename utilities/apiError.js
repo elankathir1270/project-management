@@ -1,6 +1,6 @@
 class ApiError extends Error {
     
-    constructor(message,statusCode) {
+    constructor(statusCode,message) {
         super(message)
         this.statusCode = statusCode,
         this.status = this.status = statusCode >= 400 && statusCode < 500 ? 'Fail' : 'Error';

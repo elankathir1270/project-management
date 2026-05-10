@@ -1,4 +1,4 @@
-const ApiError = require("./../utilities/ApiError");
+const ApiError = require("../utilities/apiError");
 
 const devErrors = (res, error) => {
   res.status(error.statusCode).json({
