@@ -1,4 +1,4 @@
-const ApiError = require('../utils/ApiError');
+const ApiError = require('./../utilities/apiError');
 
 const authorizeRoles = (...allowedRoles) => {
   return (req, res, next) => {
