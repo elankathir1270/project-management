@@ -10,6 +10,13 @@ const createTask = async (data,userId) => {
         throw new ApiError(404, "Project not found");
     }
 
+    //Assigned user must belong to user
+    if(data.assignedTo &&
+        !project.members.includes(data.assignedTo)
+    ){
+        throw new ApiError(400, 'Assigned user is not a project member');
+    }
+
     const task = await Task.create({
         ...data,
         createdBy: userId
@@ -20,7 +27,18 @@ const createTask = async (data,userId) => {
 }
 
 //Get tasks by project Id
-const getProjectTasks = async (projectId) => {
+const getProjectTasks = async (projectId,userId) => {
+    const project = await Project.findById(projectId);
+
+    if(!project) {
+        throw new ApiError(404, 'Project not found');
+    }
+
+    //Only project members can access
+    if(!project.members.includes(userId)){
+        throw new ApiError(403,  'You are not a member of this project');
+    }
+
     const tasks = await Task.find({projectId : projectId})
     .populate('assignedTo', 'name email')
     .populate('createdBy', 'name')

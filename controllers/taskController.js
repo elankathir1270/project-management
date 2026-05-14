@@ -13,7 +13,7 @@ exports.createTask = catchAsync(async (req,res) => {
 
 //Get project tasks
 exports.getProjectTasks = catchAsync(async (req,res) => {
-    const tasks = await taskService.getProjectTasks(req.params.projectId);
+    const tasks = await taskService.getProjectTasks(req.params.projectId, req.user.userId);
     
     res.status(200).json({
         status: "success",

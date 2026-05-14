@@ -34,7 +34,7 @@ const addMember = async (projectId, memberId) => {
     );
 
     if (memberExists) {
-        throw new ApiError(409, "Member already added to project");
+        throw new ApiError(400, "Member already added to project");
     }
 
     project.members.push(memberId);
