@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const ApiError = require("./../utilities/apiError");
-const { generateAccessToken, generateRefreshToken } = require("./../utilities/token");
+const { generateAccessToken, generateRefreshToken,verifyRefreshToken  } = require("./../utilities/token");
 
 //Register user
 const registerUser = async ({ name, email, password, role }) => {
@@ -62,4 +62,35 @@ const loginUser = async ({ email, password }) => {
   };
 };
 
-module.exports = {registerUser, loginUser}
+//Refresh access token
+const refreshAccessToken = async (refreshToken) => {
+  if(!refreshToken){
+    throw new ApiError(401, "Refresh token is missing");
+  }
+
+  let decoded;
+
+  try {
+    decoded = verifyRefreshToken(refreshToken);
+  }catch(err) {
+    throw new ApiError(400, "Invalid refresh token");
+  }
+
+  const user = await User.findById(decoded.userId);
+
+  if (!user) {
+    throw new ApiError(401, 'User not found');
+  }
+
+  const payload = {
+    userId: user._id,
+    role: user.role
+  }
+
+  const newAccessToken = generateAccessToken(payload);
+
+  return newAccessToken;
+
+}
+
+module.exports = {registerUser, loginUser, refreshAccessToken}

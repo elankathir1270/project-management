@@ -14,4 +14,6 @@ authRouter
 authRouter.route("/login").post(validate(loginSchema), authController.login);
 authRouter.route("/logout").post(authController.logout);
 
+authRouter.route("/refresh-token").post(authController.refreshToken);
+
 module.exports = authRouter;
