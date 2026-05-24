@@ -9,6 +9,7 @@ const {
   updateTaskStatusSchema,
 } = require("./../validations/task.validation");
 const validateObjectId = require("./../middlewares/objectId.middleware");
+const upload = require('./../middlewares/upload.middleware');
 
 const taskRouter = express.Router();
 
@@ -38,5 +39,13 @@ taskRouter
     validateObjectId("taskId"),
     taskController.updateTaskStatus,
   );
+
+taskRouter
+.route('/:taskId/attachments')
+.post(
+  authMiddleware,
+  upload.single('attachment'),
+  taskController.uploadAttachment  
+)  
 
 module.exports = taskRouter;

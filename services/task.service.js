@@ -84,8 +84,34 @@ const updateTaskStatus = async (taskId, status, userId) => {
   return task;
 };
 
+//Upload attachment
+const uploadAttachment = async (taskId, file, userId) => {
+  const task = await Task.findById(taskId);
+
+  if (!task) {
+    throw new ApiError(404, "Task not found");
+  }
+
+  const project = await Project.findById(task.project);
+
+  if (!project.members.includes(userId)) {
+    throw new ApiError(403, "You are not a member of this project");
+  }
+
+  task.attachments.push({
+    fileName: file.filename,
+    fileUrl: `/uploads/attachments/${file.filename}`,
+    uploadedBy: userId,
+  });
+
+  await task.save();
+
+  return task;
+};
+
 module.exports = {
   createTask,
   getProjectTasks,
   updateTaskStatus,
+  uploadAttachment,
 };

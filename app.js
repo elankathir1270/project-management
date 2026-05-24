@@ -4,7 +4,8 @@ const userRoutes = require('./routes/user.routes')
 const projectRoutes = require('./routes/project.routes');
 const taskRoutes = require('./routes/task.route');
 const cookieParser = require('cookie-parser');
-const globalErrorHandler = require('./controllers/errorController')
+const globalErrorHandler = require('./controllers/errorController');
+const path = require('path');
 
 const app = express();
 
@@ -13,6 +14,12 @@ app.use(express.json({limit: '10kb'}));
 
 //Cookie Parser
 app.use(cookieParser());
+
+//To access uploaded file from FE
+app.use(
+  '/uploads',
+  express.static(path.join(__dirname, 'uploads'))
+);
 
 
 app.use('/api/v1/auth', authRoutes);

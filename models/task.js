@@ -1,3 +1,4 @@
+const { ref } = require('joi');
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema(
@@ -27,6 +28,17 @@ const taskSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
+
+    attachments: [
+      {
+        fileName: String,
+        fileUrl: String,
+        uploadedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+        }
+      }
+    ],
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

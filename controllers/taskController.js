@@ -38,3 +38,21 @@ exports.updateTaskStatus = catchAsync(async (req, res) => {
     data: task,
   });
 });
+
+//Upload attachments
+exports.uploadAttachment = catchAsync(async (req,res) => {
+  if (!req.file) {
+    throw new ApiError(400, 'No file uploaded');
+  }
+
+  const task = await taskService.uploadAttachment(
+    req.params.taskId,
+    req.file,
+    req.user.userId
+  );
+
+  res.status(200).json({
+    status: "success",
+    data: task
+  });
+});
