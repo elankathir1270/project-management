@@ -2,6 +2,7 @@ const Task = require("./../models/task");
 const Project = require("./../models/project");
 const ApiError = require("./../utilities/apiError");
 const ApiFeatures = require("./../utilities/apiFeatures");
+const { getIo } = require("./../config/socket");
 
 //Create Task
 const createTask = async (data, userId) => {
@@ -20,6 +21,16 @@ const createTask = async (data, userId) => {
     ...data,
     createdBy: userId,
   });
+
+  //Emit real-time notification
+  if (task.assignedTo) {
+    const io = getIo();
+
+    io.to(task.assignedTo.toString()).emit("taskAssigned", {
+      message: `New task assigned: ${task.title}`,
+      task,
+    });
+  }
 
   return task;
 };
@@ -81,6 +92,12 @@ const updateTaskStatus = async (taskId, status, userId) => {
 
   await task.save();
 
+  const io = getIo();
+  io.to(task.assignedTo.toString()).emit("taskStatusUpdated", {
+    message: `Task "${task.title}" updated to ${status}`,
+    task,
+  });
+
   return task;
 };
 
@@ -105,6 +122,13 @@ const uploadAttachment = async (taskId, file, userId) => {
   });
 
   await task.save();
+
+  const io = getIO();
+
+  io.to(task.createdBy.toString()).emit("attachmentUploaded", {
+    message: `New attachment added to task: ${task.title}`,
+    task,
+  });
 
   return task;
 };
