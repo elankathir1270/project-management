@@ -1,5 +1,6 @@
 const Project = require('./../models/project');
 const ApiError = require("./../utilities/apiError");
+const { createActivityLog } = require('./../services/activity.service');
 
 
 //create projects
@@ -8,6 +9,13 @@ const createProject = async (data, userId) => {
         ...data,
         createdBy: userId,
         members: [userId]
+    });
+
+    await createActivityLog({
+        action: 'PROJECT_CREATED',
+        message: `Project "${project.title}" created`,
+        performedBy: userId,
+        project: project._id
     })
 
     return project
@@ -39,6 +47,14 @@ const addMember = async (projectId, memberId) => {
 
     project.members.push(memberId);
     await project.save();
+
+    await createActivityLog({
+        action: 'MEMBER_ADDED',
+        message: `New member added to project`,
+        performedBy: project.createdBy,
+        project: project._id,
+        metadata: {memberId}
+    })
 
     return project;
 }

@@ -3,6 +3,7 @@ const Project = require("./../models/project");
 const ApiError = require("./../utilities/apiError");
 const ApiFeatures = require("./../utilities/apiFeatures");
 const { getIo } = require("./../config/socket");
+const { createActivityLog } = require("./../services/activity.service");
 
 //Create Task
 const createTask = async (data, userId) => {
@@ -31,6 +32,14 @@ const createTask = async (data, userId) => {
       task,
     });
   }
+
+  await createActivityLog({
+    action: "TASK_CREATED",
+    message: `Task ${task.title} created`,
+    performedBy: userId,
+    project: task.projectId,
+    task: task._id,
+  });
 
   return task;
 };
@@ -88,14 +97,28 @@ const updateTaskStatus = async (taskId, status, userId) => {
     throw new ApiError(403, "You can only update your own task");
   }
 
+  const oldStatus = task.status;
   task.status = status;
 
   await task.save();
 
+  //Emit real-time notification
   const io = getIo();
   io.to(task.assignedTo.toString()).emit("taskStatusUpdated", {
     message: `Task "${task.title}" updated to ${status}`,
     task,
+  });
+
+  await createActivityLog({
+    action: "TASK_STATUS_UPDATED",
+    message: `Task ${task.title} status updated`,
+    performedBy: userId,
+    project: task.projectId,
+    task: task._id,
+    metadata: {
+      oldStatus,
+      newStatus: status,
+    },
   });
 
   return task;
@@ -123,11 +146,23 @@ const uploadAttachment = async (taskId, file, userId) => {
 
   await task.save();
 
+  //Emit real-time notification
   const io = getIO();
 
   io.to(task.createdBy.toString()).emit("attachmentUploaded", {
     message: `New attachment added to task: ${task.title}`,
     task,
+  });
+
+  await createActivityLog({
+    action: "ATTACHMENT_UPLOADED",
+    message: `Attachment uploaded to task "${task.title}"`,
+    performedBy: userId,
+    project: task.projectId,
+    task: task._id,
+    metadata: {
+      fileName: file.filename,
+    },
   });
 
   return task;

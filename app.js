@@ -3,6 +3,7 @@ const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes')
 const projectRoutes = require('./routes/project.routes');
 const taskRoutes = require('./routes/task.route');
+const activityRoutes = require('./routes/activity.routes');
 const cookieParser = require('cookie-parser');
 const globalErrorHandler = require('./controllers/errorController');
 const path = require('path');
@@ -26,6 +27,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/projects', projectRoutes);
 app.use('/api/v1/tasks', taskRoutes);
+app.use('/api/v1/activity', activityRoutes);
 
 //Global error handler
 app.use(globalErrorHandler);
