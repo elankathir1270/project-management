@@ -1,0 +1,8 @@
+2026-05-28T09:27:29.791Z [info]: Express Server is up and running..
+2026-05-28T09:27:30.629Z [info]: Connection to db successful
+2026-05-28T09:28:04.678Z [error]: Error: Invalid password
+    at Object.loginUser (/opt/NODE/project-management-api/services/auth.service.js:50:11)
+    at async /opt/NODE/project-management-api/controllers/authController.js:32:47
+2026-05-28T09:28:04.683Z [info]: ::1 - - [28/May/2026:09:28:04 +0000] "POST /api/v1/auth/login HTTP/1.1" 400 112 "-" "PostmanRuntime/7.49.1"
+2026-05-28T09:28:40.633Z [info]: ::1 - - [28/May/2026:09:28:40 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 489 "-" "PostmanRuntime/7.49.1"
+2026-05-28T09:28:47.369Z [info]: ::1 - - [28/May/2026:09:28:47 +0000] "GET /api/v1/projects HTTP/1.1" 200 586 "-" "PostmanRuntime/7.49.1"

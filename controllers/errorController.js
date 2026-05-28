@@ -1,4 +1,5 @@
 const ApiError = require("../utilities/apiError");
+const logger = require("./../utilities/logger");
 
 const devErrors = (res, error) => {
   res.status(error.statusCode).json({
@@ -57,6 +58,15 @@ const handleTokenExpiredError = (error) => {
 module.exports = (error, req, res, next) => {
   error.statusCode = error.statusCode || 500;
   error.status = error.status || "Error";
+
+  // Winston logging
+  logger.error({
+    message: error.message,
+    stack: error.stack,
+    method: req.method,
+    url: req.originalUrl,
+    ip: req.ip,
+  });
 
   if (process.env.NODE_ENV === "development") {
     devErrors(res, error);
