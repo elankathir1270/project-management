@@ -6,3 +6,99 @@
 2026-05-28T09:28:04.683Z [info]: ::1 - - [28/May/2026:09:28:04 +0000] "POST /api/v1/auth/login HTTP/1.1" 400 112 "-" "PostmanRuntime/7.49.1"
 2026-05-28T09:28:40.633Z [info]: ::1 - - [28/May/2026:09:28:40 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 489 "-" "PostmanRuntime/7.49.1"
 2026-05-28T09:28:47.369Z [info]: ::1 - - [28/May/2026:09:28:47 +0000] "GET /api/v1/projects HTTP/1.1" 200 586 "-" "PostmanRuntime/7.49.1"
+2026-05-29T07:42:24.731Z [info]: Express Server is up and running..
+2026-05-29T07:42:26.177Z [info]: Connection to db successful
+2026-05-29T07:48:32.520Z [info]: Express Server is up and running..
+2026-05-29T07:48:33.478Z [info]: Connection to db successful
+2026-05-29T07:54:47.723Z [info]: Express Server is up and running..
+2026-05-29T07:54:49.080Z [info]: Connection to db successful
+2026-05-29T08:00:38.836Z [info]: Express Server is up and running..
+2026-05-29T08:00:40.512Z [info]: Connection to db successful
+2026-05-29T08:01:52.296Z [info]: Express Server is up and running..
+2026-05-29T08:01:53.673Z [info]: Connection to db successful
+2026-05-29T09:23:13.669Z [info]: Express Server is up and running..
+2026-05-29T09:23:14.337Z [info]: Connection to db successful
+2026-05-29T09:24:52.040Z [info]: Express Server is up and running..
+2026-05-29T09:24:52.983Z [info]: Connection to db successful
+2026-05-29T11:51:14.449Z [info]: Connection to db successful
+2026-05-29T11:51:14.475Z [info]: Redis Connected
+2026-05-29T11:51:14.479Z [info]: Express Server is up and running..
+2026-05-29T11:53:51.246Z [info]: Connection to db successful
+2026-05-29T11:53:51.302Z [info]: Redis Connected
+2026-05-29T11:53:51.330Z [info]: Express Server is up and running..
+2026-05-29T11:54:04.936Z [info]: Connection to db successful
+2026-05-29T11:54:04.960Z [info]: Redis Connected
+2026-05-29T11:54:04.964Z [info]: Express Server is up and running..
+2026-05-29T12:06:55.013Z [info]: ::ffff:10.3.1.236 - - [29/May/2026:12:06:55 +0000] "GET / HTTP/1.0" 404 139 "-" "-"
+2026-05-29T14:22:31.432Z [info]: Connection to db successful
+2026-06-01T07:14:59.235Z [info]: Connection to db successful
+2026-06-01T07:14:59.300Z [info]: Redis Connected
+2026-06-01T07:14:59.317Z [info]: Express Server is up and running..
+2026-06-01T08:24:54.176Z [info]: Connection to db successful
+2026-06-01T08:24:54.201Z [info]: Redis Connected
+2026-06-01T08:24:54.208Z [info]: Express Server is up and running..
+2026-06-01T08:26:12.209Z [info]: Connection to db successful
+2026-06-01T08:26:12.264Z [info]: Redis Connected
+2026-06-01T08:26:12.274Z [info]: Express Server is up and running..
+2026-06-01T08:52:01.799Z [info]: Connection to db successful
+2026-06-01T08:52:01.848Z [info]: Redis Connected
+2026-06-01T08:52:01.855Z [info]: Express Server is up and running..
+2026-06-01T08:54:05.515Z [info]: Connection to db successful
+2026-06-01T08:54:05.583Z [info]: Redis Connected
+2026-06-01T08:54:05.592Z [info]: Express Server is up and running..
+2026-06-01T08:54:19.044Z [info]: Connection to db successful
+2026-06-01T08:54:19.060Z [info]: Redis Connected
+2026-06-01T08:54:19.062Z [info]: Express Server is up and running..
+2026-06-01T08:56:11.536Z [info]: ::1 - - [01/Jun/2026:08:56:11 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 489 "-" "PostmanRuntime/7.49.1"
+2026-06-01T08:56:27.093Z [error]: Error: You are not a member of this project
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:65:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-01T08:56:27.096Z [info]: ::1 - - [01/Jun/2026:08:56:27 +0000] "GET /api/v1/tasks/project/6a032e52bea5bc46290e57e5 HTTP/1.1" 403 132 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:00:09.893Z [error]: Error: Access denied
+    at /opt/NODE/project-management-api/middlewares/role.middleware.js:6:19
+    at Layer.handleRequest (/opt/NODE/project-management-api/node_modules/router/lib/layer.js:152:17)
+    at next (/opt/NODE/project-management-api/node_modules/router/lib/route.js:157:13)
+    at authMiddleware (/opt/NODE/project-management-api/middlewares/auth.middleware.js:27:5)
+    at Layer.handleRequest (/opt/NODE/project-management-api/node_modules/router/lib/layer.js:152:17)
+    at next (/opt/NODE/project-management-api/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/opt/NODE/project-management-api/node_modules/router/lib/route.js:117:3)
+    at handle (/opt/NODE/project-management-api/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/opt/NODE/project-management-api/node_modules/router/lib/layer.js:152:17)
+    at /opt/NODE/project-management-api/node_modules/router/index.js:295:15
+2026-06-01T09:00:09.895Z [info]: ::1 - - [01/Jun/2026:09:00:09 +0000] "PATCH /api/v1/projects/6a032e52bea5bc46290e57e5/members HTTP/1.1" 403 109 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:00:43.135Z [info]: ::1 - - [01/Jun/2026:09:00:43 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 487 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:00:49.331Z [info]: ::1 - - [01/Jun/2026:09:00:49 +0000] "PATCH /api/v1/projects/6a032e52bea5bc46290e57e5/members HTTP/1.1" 200 348 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:01:11.161Z [info]: ::1 - - [01/Jun/2026:09:01:11 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 489 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:01:30.506Z [error]: ReferenceError: data is not defined
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:69:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-01T09:01:30.509Z [info]: ::1 - - [01/Jun/2026:09:01:30 +0000] "GET /api/v1/tasks/project/6a032e52bea5bc46290e57e5 HTTP/1.1" 500 94 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:05:01.875Z [info]: Connection to db successful
+2026-06-01T09:05:01.967Z [info]: Redis Connected
+2026-06-01T09:05:01.976Z [info]: Express Server is up and running..
+2026-06-01T09:05:07.362Z [error]: TypeError: getCache is not a function
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:72:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-01T09:05:07.401Z [info]: ::1 - - [01/Jun/2026:09:05:07 +0000] "GET /api/v1/tasks/project/6a032e52bea5bc46290e57e5 HTTP/1.1" 500 101 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:08:37.426Z [info]: Connection to db successful
+2026-06-01T09:08:37.443Z [info]: Redis Connected
+2026-06-01T09:08:37.446Z [info]: Express Server is up and running..
+2026-06-01T09:08:42.814Z [info]: ::1 - - [01/Jun/2026:09:08:42 +0000] "GET /api/v1/tasks/project/6a032e52bea5bc46290e57e5 HTTP/1.1" 200 2793 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:09:55.567Z [info]: ::1 - - [01/Jun/2026:09:09:55 +0000] "GET /api/v1/tasks/project/6a032e52bea5bc46290e57e5 HTTP/1.1" 200 2793 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:10:38.246Z [error]: Error: You are not a member of this project
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:65:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-01T09:10:38.249Z [info]: ::1 - - [01/Jun/2026:09:10:38 +0000] "GET /api/v1/tasks/project/6a032f03d55cd7cbf5ed6f5e HTTP/1.1" 403 132 "-" "PostmanRuntime/7.49.1"
+2026-06-01T09:12:04.347Z [info]: ::1 - - [01/Jun/2026:09:12:04 +0000] "GET /api/v1/tasks/project/6a1571ffad915fc074a01167 HTTP/1.1" 200 848 "-" "PostmanRuntime/7.49.1"
+2026-06-04T05:47:57.934Z [info]: Connection to db successful
+2026-06-04T05:47:57.956Z [info]: Redis Connected
+2026-06-04T05:48:35.531Z [info]: Connection to db successful
+2026-06-04T05:48:35.558Z [info]: Redis Connected
+2026-06-04T05:48:35.560Z [info]: Express Server is up and running..
+2026-06-04T05:48:59.603Z [info]: ::1 - - [04/Jun/2026:05:48:59 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 489 "-" "PostmanRuntime/7.49.1"
+2026-06-04T05:49:07.381Z [info]: ::1 - - [04/Jun/2026:05:49:07 +0000] "GET /api/v1/tasks/project/6a1571ffad915fc074a01167 HTTP/1.1" 200 848 "-" "PostmanRuntime/7.49.1"
+2026-06-04T05:49:46.908Z [info]: Connection to db successful

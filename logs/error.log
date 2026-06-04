@@ -1,3 +1,33 @@
 2026-05-28T09:28:04.678Z [error]: Error: Invalid password
     at Object.loginUser (/opt/NODE/project-management-api/services/auth.service.js:50:11)
     at async /opt/NODE/project-management-api/controllers/authController.js:32:47
+2026-05-29T14:22:31.447Z [error]: UNCAUGHT EXCEPTION
+2026-06-01T08:56:27.093Z [error]: Error: You are not a member of this project
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:65:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-01T09:00:09.893Z [error]: Error: Access denied
+    at /opt/NODE/project-management-api/middlewares/role.middleware.js:6:19
+    at Layer.handleRequest (/opt/NODE/project-management-api/node_modules/router/lib/layer.js:152:17)
+    at next (/opt/NODE/project-management-api/node_modules/router/lib/route.js:157:13)
+    at authMiddleware (/opt/NODE/project-management-api/middlewares/auth.middleware.js:27:5)
+    at Layer.handleRequest (/opt/NODE/project-management-api/node_modules/router/lib/layer.js:152:17)
+    at next (/opt/NODE/project-management-api/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/opt/NODE/project-management-api/node_modules/router/lib/route.js:117:3)
+    at handle (/opt/NODE/project-management-api/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/opt/NODE/project-management-api/node_modules/router/lib/layer.js:152:17)
+    at /opt/NODE/project-management-api/node_modules/router/index.js:295:15
+2026-06-01T09:01:30.506Z [error]: ReferenceError: data is not defined
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:69:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-01T09:05:07.362Z [error]: TypeError: getCache is not a function
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:72:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-01T09:10:38.246Z [error]: Error: You are not a member of this project
+    at Object.getProjectTasks (/opt/NODE/project-management-api/services/task.service.js:65:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/NODE/project-management-api/controllers/taskController.js:16:17
+2026-06-04T05:47:57.959Z [error]: UNCAUGHT EXCEPTION
+2026-06-04T05:49:46.919Z [error]: UNCAUGHT EXCEPTION

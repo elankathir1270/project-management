@@ -3,7 +3,7 @@ const taskService = require("./../services/task.service");
 
 //Create task
 exports.createTask = catchAsync(async (req, res) => {
-  const task = await taskService.createTask(req.body, req.user.userId);
+  const task = await taskService.createTask(req.body, req.user.userId, req.params);
 
   res.status(201).json({
     status: "success",

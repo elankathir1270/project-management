@@ -4,6 +4,12 @@ const ApiError = require("./../utilities/apiError");
 const ApiFeatures = require("./../utilities/apiFeatures");
 const { getIo } = require("./../config/socket");
 const { createActivityLog } = require("./../services/activity.service");
+const {
+  getCache,
+  setCache,
+  deleteCache,
+  deleteCacheByPattern,
+} = require("./../utilities/cache");
 
 //Create Task
 const createTask = async (data, userId) => {
@@ -13,7 +19,7 @@ const createTask = async (data, userId) => {
     throw new ApiError(404, "Project not found");
   }
 
-  //Assigned user must belong to user
+  //Assigned user must belong to project
   if (data.assignedTo && !project.members.includes(data.assignedTo)) {
     throw new ApiError(400, "Assigned user is not a project member");
   }
@@ -22,6 +28,8 @@ const createTask = async (data, userId) => {
     ...data,
     createdBy: userId,
   });
+
+  await deleteCacheByPattern(`tasks:${data.projectId}:*`);
 
   //Emit real-time notification
   if (task.assignedTo) {
@@ -57,6 +65,16 @@ const getProjectTasks = async (projectId, userId, queryParams) => {
     throw new ApiError(403, "You are not a member of this project");
   }
 
+  //Cache key
+  const cacheKey = `tasks:${projectId}:${JSON.stringify(queryParams)}`;
+
+  //Cached Tasks
+  const cachedTasks = await getCache(cacheKey);
+
+  if (cachedTasks) {
+    return cachedTasks;
+  }
+
   //Base query
   const mongoQuery = Task.find({ projectId: projectId })
     .populate("assignedTo", "name email")
@@ -76,12 +94,17 @@ const getProjectTasks = async (projectId, userId, queryParams) => {
     projectId: projectId,
   });
 
-  return {
+  const result = {
     total: totalTasks,
     count: tasks.length,
     page: Number(queryParams.page) || 1,
     tasks,
   };
+
+  //Store in redis cache
+  await setCache(cacheKey, result, 300);
+
+  return result;
 };
 
 //Update task status
@@ -101,6 +124,8 @@ const updateTaskStatus = async (taskId, status, userId) => {
   task.status = status;
 
   await task.save();
+
+  await deleteCacheByPattern(`tasks:${data.projectId}:*`);
 
   //Emit real-time notification
   const io = getIo();
@@ -145,6 +170,8 @@ const uploadAttachment = async (taskId, file, userId) => {
   });
 
   await task.save();
+
+  await deleteCacheByPattern(`tasks:${task.project}:*`);
 
   //Emit real-time notification
   const io = getIO();
